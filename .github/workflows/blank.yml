@@ -1,0 +1,28 @@
+name: Deploy Cloudflare Worker
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Wrangler
+        run: npm install -g wrangler
+
+      - name: Deploy Worker
+        run: wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${cfat_tnD46ugZns9e8XdT1uRwAiBafJeyq9Y0nWNaNzAT3e695bdb}
+          CLOUDFLARE_ACCOUNT_ID: ${14dada2899b6694eb14027ed05a859e9}
